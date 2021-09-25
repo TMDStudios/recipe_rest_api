@@ -12,4 +12,17 @@ class RecipeDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = RecipeSerializer
 
 def home(request):
-    return render(request, 'home.html', {})
+    recipes = Recipe.objects.all()
+    recipes = recipes.order_by('-id')
+    context = {}
+    context['recipes'] = recipes
+    
+    return render(request, 'home.html', context)
+
+class TestList(generics.ListCreateAPIView):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer
+
+class TestDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Recipe.objects.all()
+    serializer_class = RecipeSerializer

@@ -2,8 +2,19 @@
 <html>
 <body>
 
-<h1>Recipe List</h1>
-<p>All recipes will be listed here</p>
+<br/>
+<h2 align="center">Recipes</h2>
+<br/>
+<hr style="height:1px; margin: auto;">
+    
+{% for recipe in recipes %}
+<p><b>{{ recipe.title }}</b> by <b>{{ recipe.author }}</b></p>
+<span>Ingredients:</span><br>
+<p>{{ recipe.ingredients|linebreaks }}</p>
+<span>Instructions:</span><br>
+<p>{{ recipe.instructions|linebreaks }}</p> 
+<hr style="height:1px; margin: auto;">
+{% endfor %}
 
 </body>
 </html>
