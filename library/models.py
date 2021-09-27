@@ -16,3 +16,12 @@ class Test(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+class Celebrity(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    taboo1 = models.CharField(max_length=255)
+    taboo2 = models.CharField(max_length=255)
+    taboo3 = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.name

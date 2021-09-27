@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Recipe, Test
-from .serializers import RecipeSerializer, TestSerializer
+from .models import Recipe, Test, Celebrity
+from .serializers import CelebritySerializer, RecipeSerializer, TestSerializer
 from django.shortcuts import render
 
 class RecipeList(generics.ListCreateAPIView):
@@ -26,3 +26,7 @@ class TestList(generics.ListCreateAPIView):
 class TestDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
+
+class CelebrityList(generics.ListCreateAPIView):
+    queryset = Celebrity.objects.all()
+    serializer_class = CelebritySerializer
