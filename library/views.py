@@ -30,3 +30,7 @@ class TestDetail(generics.RetrieveUpdateDestroyAPIView):
 class CelebrityList(generics.ListCreateAPIView):
     queryset = Celebrity.objects.all()
     serializer_class = CelebritySerializer
+
+class CelebrityDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Celebrity.objects.all()
+    serializer_class = CelebritySerializer
