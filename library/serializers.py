@@ -14,4 +14,4 @@ class TestSerializer(serializers.ModelSerializer):
 class CelebritySerializer(serializers.ModelSerializer):
     class Meta:
         model = Celebrity
-        fields = ["name", "taboo1", "taboo2", "taboo3"]
+        fields = ["pk", "name", "taboo1", "taboo2", "taboo3"]
