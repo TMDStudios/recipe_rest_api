@@ -9,7 +9,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 class TestSerializer(serializers.ModelSerializer):
     class Meta:
         model = Test
-        fields = ["name", "location"]
+        fields = ["pk", "name", "location"]
 
 class CelebritySerializer(serializers.ModelSerializer):
     class Meta:
