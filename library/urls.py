@@ -10,4 +10,7 @@ urlpatterns = [
     path("test/<int:pk>", views.TestDetail.as_view()),
     path("celebrities/", views.CelebrityList.as_view()),
     path("celebrities/<int:pk>", views.CelebrityDetail.as_view()),
+    path("people/", views.PersonList.as_view()),
+    path("contacts/", views.ContactList.as_view()),
+    path("contacts/<int:pk>", views.ContactDetail.as_view()),
 ]

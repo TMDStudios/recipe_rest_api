@@ -25,3 +25,12 @@ class Celebrity(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+class Person(models.Model):
+    name = models.CharField(max_length=255)
+
+class Contact(models.Model):
+    name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    mobile = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)

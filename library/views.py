@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Recipe, Test, Celebrity
-from .serializers import CelebritySerializer, RecipeSerializer, TestSerializer
+from .models import Recipe, Test, Celebrity, Person, Contact
+from .serializers import CelebritySerializer, PersonSerializer, RecipeSerializer, TestSerializer, ContactSerializer
 from django.shortcuts import render
 
 class RecipeList(generics.ListCreateAPIView):
@@ -34,3 +34,15 @@ class CelebrityList(generics.ListCreateAPIView):
 class CelebrityDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Celebrity.objects.all()
     serializer_class = CelebritySerializer
+
+class PersonList(generics.ListCreateAPIView):
+    queryset = Person.objects.all()
+    serializer_class = PersonSerializer
+
+class ContactList(generics.ListCreateAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
+
+class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Contact.objects.all()
+    serializer_class = ContactSerializer
