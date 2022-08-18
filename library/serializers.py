@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe, Test, Celebrity, Person, Contact
+from .models import Recipe, Test, Celebrity, Person, Contact, AppUser
 
 class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,29 @@ class ContactSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = ["pk", "name", "location", "mobile", "email"]
+
+class AppUserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = AppUser
+        fields = "__all__"
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'api_key': {'write_only': True},
+            'settings': {'write_only': True}
+        }
+
+class NewAppUserSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        super(NewAppUserSerializer, self).__init__(*args, **kwargs)
+        if self.context['request'].method == "PUT":
+            self.fields.pop('password')
+
+    class Meta:
+        model = AppUser
+        fields = ["id", "email", "username", "password", "image", "website", "settings", "about", "created_at"]
+        extra_kwargs = {
+            'password': {'write_only': True},
+            'api_key': {'write_only': True},
+            'settings': {'write_only': True}
+        }

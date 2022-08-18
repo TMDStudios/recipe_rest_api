@@ -13,4 +13,8 @@ urlpatterns = [
     path("people/", views.PersonList.as_view()),
     path("contacts/", views.ContactList.as_view()),
     path("contacts/<int:pk>", views.ContactDetail.as_view()),
+    path("users/", views.AppUserList.as_view()),
+    path("users/<slug:api_key>", views.GetUser.as_view()),
+    path("user-data/", views.allUserData, name='userData'),
+    path("user-data/<int:pk>", views.userData, name='userData'),
 ]

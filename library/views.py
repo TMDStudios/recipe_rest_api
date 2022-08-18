@@ -1,7 +1,12 @@
 from rest_framework import generics
-from .models import Recipe, Test, Celebrity, Person, Contact
-from .serializers import CelebritySerializer, PersonSerializer, RecipeSerializer, TestSerializer, ContactSerializer
-from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from .models import Recipe, Test, Celebrity, Person, Contact, AppUser
+from .serializers import CelebritySerializer, PersonSerializer, RecipeSerializer, TestSerializer, ContactSerializer, AppUserSerializer, NewAppUserSerializer
+from django.shortcuts import render, get_object_or_404
+import json
+from django.http import JsonResponse, HttpResponse
+from django.forms.models import model_to_dict
 
 class RecipeList(generics.ListCreateAPIView):
     queryset = Recipe.objects.all()
@@ -46,3 +51,48 @@ class ContactList(generics.ListCreateAPIView):
 class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+
+class AppUserList(generics.ListCreateAPIView):
+    queryset = AppUser.objects.all()
+    serializer_class = NewAppUserSerializer
+
+class AppUserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = AppUser.objects.all()
+    serializer_class = NewAppUserSerializer
+
+def allUserData(request):
+    users = AppUser.objects.all()
+    pw = ""
+    context = {}
+    for user in users:
+        if user.username == "bobby":
+            print("GOT BOBBY!")
+            pw = user.password
+        currentUser = {}
+        currentUser["username"] = user.username
+        currentUser["email"] = user.email
+        context[user.id] = [currentUser]
+    
+    return JsonResponse(context, safe=False)
+
+def userData(request, pk):
+    user = get_object_or_404(AppUser, id=pk)
+    pw = ""
+    print(user.api_key)
+    if user.username == "bobby":
+        print("GOT BOBBY!")
+        pw = user.password
+        
+    
+    return HttpResponse(user.email)
+
+class GetUser(APIView):
+    def get(self, request, api_key, *args, **kwargs):
+        print(request.data)
+        print(api_key)
+        try:
+            user = AppUser.objects.all().filter(api_key=api_key)
+            serializer = AppUserSerializer(user[0])
+            return Response(serializer.data)
+        except IndexError:
+            return JsonResponse({}, safe=False)
