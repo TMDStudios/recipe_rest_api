@@ -42,8 +42,14 @@ class AppUser(models.Model):
     username = models.CharField(max_length=64, unique=True)
     password = models.CharField(max_length=64, default="")
     api_key = models.CharField(max_length=64, unique=True, default=hashlib.sha256(str(timezone.now).encode()).hexdigest())
-    image = models.CharField(max_length=256, default="")
-    website = models.CharField(max_length=256, default="")
-    settings = models.CharField(max_length=1024, default="") 
+    image = models.CharField(max_length=255, default="")
+    website = models.CharField(max_length=255, default="")
+    settings = models.TextField(max_length=1024, default="") 
     about = models.TextField(max_length=1024, default="")
     created_at = models.DateTimeField(default=timezone.now)
+
+class Post(models.Model):
+    user = models.CharField(max_length=64, unique=True)
+    likes = models.TextField(default="")
+    text = models.TextField(default="")
+    comments = models.TextField(default="")

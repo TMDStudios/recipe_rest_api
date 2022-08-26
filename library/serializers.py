@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe, Test, Celebrity, Person, Contact, AppUser
+from .models import Recipe, Test, Celebrity, Person, Contact, AppUser, Post
 
 class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,3 +51,9 @@ class NewAppUserSerializer(serializers.ModelSerializer):
             'api_key': {'write_only': True},
             'settings': {'write_only': True}
         }
+
+class PostSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Post
+        fields = "__all__"
