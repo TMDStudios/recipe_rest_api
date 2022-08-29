@@ -77,12 +77,6 @@ def allUserData(request):
 
 def userData(request, pk):
     user = get_object_or_404(AppUser, id=pk)
-    pw = ""
-    print(user.api_key)
-    if user.username == "bobby":
-        print("GOT BOBBY!")
-        pw = user.password
-        
     
     return HttpResponse(user.email)
 
