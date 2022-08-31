@@ -56,31 +56,8 @@ class AppUserList(generics.ListCreateAPIView):
     queryset = AppUser.objects.all()
     serializer_class = NewAppUserSerializer
 
-class AppUserDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = AppUser.objects.all()
-    serializer_class = NewAppUserSerializer
-
-def allUserData(request):
-    users = AppUser.objects.all()
-    pw = ""
-    context = {}
-    for user in users:
-        currentUser = {}
-        currentUser["username"] = user.username
-        currentUser["email"] = user.email
-        context[user.id] = [currentUser]
-    
-    return JsonResponse(context, safe=False)
-
-def userData(request, pk):
-    user = get_object_or_404(AppUser, id=pk)
-    
-    return HttpResponse(user.email)
-
 class GetUser(APIView):
     def get(self, request, api_key, *args, **kwargs):
-        print(request.data)
-        print(api_key)
         try:
             user = AppUser.objects.all().filter(api_key=api_key)
             serializer = AppUserSerializer(user[0])
@@ -88,18 +65,18 @@ class GetUser(APIView):
         except IndexError:
             return JsonResponse({}, safe=False)
 
-class PostList(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
-class PostDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
-
 def login(request, username, password):
     user = get_object_or_404(AppUser, username=username)
 
     if password == user.password:
-        return HttpResponse("OK")
+        return HttpResponse(user.api_key)
     
     return HttpResponse("Unable to log in")
+
+class PostList(generics.ListCreateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer
+
+class PostDetail(generics.RetrieveUpdateAPIView):
+    queryset = Post.objects.all()
+    serializer_class = PostSerializer

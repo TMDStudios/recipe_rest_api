@@ -31,26 +31,23 @@ class AppUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppUser
         fields = "__all__"
-        extra_kwargs = {
-            'password': {'write_only': True},
-            'settings': {'write_only': True}
-        }
 
 class NewAppUserSerializer(serializers.ModelSerializer):
-    def __init__(self, *args, **kwargs):
-        super(NewAppUserSerializer, self).__init__(*args, **kwargs)
-        if self.context['request'].method == "PUT":
-            self.fields.pop('password')
 
     class Meta:
         model = AppUser
-        fields = ["id", "email", "username", "api_key", "password", "image", "website", "settings", "about", "created_at"]
+        fields = ["id", "email", "username", "password", "image", "website", "settings", "about", "created_at"]
         extra_kwargs = {
             'password': {'write_only': True},
+            'api_key': {'write_only': True},
             'settings': {'write_only': True}
         }
 
 class PostSerializer(serializers.ModelSerializer):
+    def __init__(self, *args, **kwargs):
+        super(PostSerializer, self).__init__(*args, **kwargs)
+        if self.context['request'].method == "PUT":
+            self.fields.pop('user')
 
     class Meta:
         model = Post
