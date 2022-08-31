@@ -50,6 +50,7 @@ class AppUser(models.Model):
 
 class Post(models.Model):
     user = models.CharField(max_length=64, unique=True)
+    title = models.CharField(max_length=255, default="")
     likes = models.TextField(default="")
     text = models.TextField(default="")
     comments = models.TextField(default="")
