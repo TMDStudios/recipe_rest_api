@@ -65,9 +65,6 @@ def allUserData(request):
     pw = ""
     context = {}
     for user in users:
-        if user.username == "bobby":
-            print("GOT BOBBY!")
-            pw = user.password
         currentUser = {}
         currentUser["username"] = user.username
         currentUser["email"] = user.email
@@ -98,3 +95,11 @@ class PostList(generics.ListCreateAPIView):
 class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+def login(request, username, password):
+    user = get_object_or_404(AppUser, username=username)
+
+    if password == user.password:
+        return HttpResponse("OK")
+    
+    return HttpResponse("Unable to log in")

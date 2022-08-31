@@ -19,4 +19,5 @@ urlpatterns = [
     path("users/", views.AppUserList.as_view()),
     path("user-data/", views.allUserData, name='userData'),
     path("posts/", views.PostList.as_view()),
+    path("login/<slug:username>/<slug:password>", views.login, name="login"),
 ]

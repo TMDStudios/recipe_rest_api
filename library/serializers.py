@@ -33,7 +33,6 @@ class AppUserSerializer(serializers.ModelSerializer):
         fields = "__all__"
         extra_kwargs = {
             'password': {'write_only': True},
-            'api_key': {'write_only': True},
             'settings': {'write_only': True}
         }
 
@@ -45,10 +44,9 @@ class NewAppUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AppUser
-        fields = ["id", "email", "username", "password", "image", "website", "settings", "about", "created_at"]
+        fields = ["id", "email", "username", "api_key", "password", "image", "website", "settings", "about", "created_at"]
         extra_kwargs = {
             'password': {'write_only': True},
-            'api_key': {'write_only': True},
             'settings': {'write_only': True}
         }
 
