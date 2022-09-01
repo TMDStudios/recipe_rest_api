@@ -30,7 +30,7 @@ class AppUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AppUser
-        fields = "__all__"
+        fields = ["id", "email", "username", "password", "image", "website", "settings", "about"]
 
 class NewAppUserSerializer(serializers.ModelSerializer):
 

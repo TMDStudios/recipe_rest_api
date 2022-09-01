@@ -8,6 +8,7 @@ urlpatterns = [
     path("celebrities/<int:pk>", views.CelebrityDetail.as_view()),
     path("contacts/<int:pk>", views.ContactDetail.as_view()),
     path("users/<slug:api_key>", views.GetUser.as_view()),
+    # path("users/<int:pk>", views.AppUserDetail.as_view()),
     path("posts/<int:pk>", views.PostDetail.as_view()),
     path("recipes/", views.RecipeList.as_view()),
     path("test/", views.TestList.as_view()),

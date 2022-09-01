@@ -56,12 +56,31 @@ class AppUserList(generics.ListCreateAPIView):
     queryset = AppUser.objects.all()
     serializer_class = NewAppUserSerializer
 
-class GetUser(APIView):
+# class AppUserDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = AppUser.objects.all()
+#     serializer_class = AppUserSerializer
+
+class GetUser(generics.RetrieveUpdateAPIView):
+    queryset = AppUser.objects.all()
+    serializer_class = AppUserSerializer
+
     def get(self, request, api_key, *args, **kwargs):
         try:
             user = AppUser.objects.all().filter(api_key=api_key)
             serializer = AppUserSerializer(user[0])
             return Response(serializer.data)
+        except IndexError:
+            return JsonResponse({}, safe=False)
+
+    def put(self, request, api_key, *args, **kwargs):
+        try:
+            user = AppUser.objects.all().filter(api_key=api_key)
+            serializer = AppUserSerializer(user[0])
+            print(user[0].username)
+            pk = user[0].id
+            self.kwargs['pk'] = pk
+            print(pk)
+            return super().update(request, pk)
         except IndexError:
             return JsonResponse({}, safe=False)
 
