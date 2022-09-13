@@ -6,6 +6,14 @@ The project is now hosted on PythonAnywhere: https://apidojo.pythonanywhere.com/
 
 ---
 
+## Post Request App API Endpoints:
+
+All Names and Locations (GET): https://apidojo.pythonanywhere.com/test
+
+New Name and Location (POST): https://apidojo.pythonanywhere.com/test
+
+---
+
 ## Social Media API Endpoints:
 
 **Users:**
