@@ -10,7 +10,7 @@ The project is now hosted on PythonAnywhere: https://apidojo.pythonanywhere.com/
 
 All Names and Locations (GET): https://apidojo.pythonanywhere.com/test
 
-New Name and Location (POST): https://apidojo.pythonanywhere.com/test
+New Name and Location (POST): https://apidojo.pythonanywhere.com/test *(Required fields: name, location)*
 
 ---
 
