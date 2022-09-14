@@ -6,7 +6,7 @@ The project is now hosted on PythonAnywhere: https://apidojo.pythonanywhere.com/
 
 ---
 
-## Post Request App API Endpoints:
+### Post Request App API Endpoints:
 
 All Names and Locations (GET): https://apidojo.pythonanywhere.com/test/
 
@@ -14,7 +14,23 @@ New Name and Location (POST): https://apidojo.pythonanywhere.com/test/ *(Require
 
 ---
 
-## Social Media API Endpoints:
+### Recipe App API Endpoints:
+
+All Names and Locations (GET): https://apidojo.pythonanywhere.com/recipes/
+
+New Name and Location (POST): https://apidojo.pythonanywhere.com/recipes/ *(Required fields: title, author, ingredients, instructions)*
+
+---
+
+### Heads Up! Prep API Endpoints:
+
+All Names and Locations (GET): https://apidojo.pythonanywhere.com/celebrities/
+
+New Name and Location (POST): https://apidojo.pythonanywhere.com/celebrities/ *(Required fields: name, taboo1, taboo2, taboo3)*
+
+---
+
+### Social Media API Endpoints:
 
 **Users:**
 
@@ -32,7 +48,7 @@ View user data: https://apidojo.pythonanywhere.com/users/api_key *(Returns all u
 
 All Posts (GET): https://apidojo.pythonanywhere.com/posts/
 
-New Post (POST): https://apidojo.pythonanywhere.com/posts/
+New Post (POST): https://apidojo.pythonanywhere.com/posts/ *(Required fields: user, title, text)*
 
 Post Details (GET): https://apidojo.pythonanywhere.com/posts/pk
 
