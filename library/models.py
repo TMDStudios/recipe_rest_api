@@ -41,12 +41,12 @@ class AppUser(models.Model):
     email = models.EmailField(max_length=64, unique=True)
     username = models.CharField(max_length=64, unique=True)
     password = models.CharField(max_length=64, blank=True, default="")
-    api_key = models.CharField(max_length=64, blank=True, default=hashlib.sha256(str(timezone.now).encode()).hexdigest())
+    api_key = models.CharField(max_length=64, blank=True, default=hashlib.sha256(str(timezone.now()).encode()).hexdigest())
     image = models.CharField(max_length=255, blank=True, default="")
     website = models.CharField(max_length=255, blank=True, default="")
     settings = models.TextField(max_length=1024, blank=True, default="") 
     about = models.TextField(max_length=1024, blank=True, default="")
-    created_at = models.DateTimeField(blank=True, default=timezone.now)
+    created_at = models.DateTimeField(blank=True, default=timezone.now())
 
 class Post(models.Model):
     user = models.CharField(max_length=64, blank=True, default="Anonymous")

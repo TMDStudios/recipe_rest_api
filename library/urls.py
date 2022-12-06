@@ -18,4 +18,5 @@ urlpatterns = [
     path("users/", views.AppUserList.as_view()),
     path("posts/", views.PostList.as_view()),
     path("login/<slug:username>/<slug:password>", views.login, name="login"),
+    path("login/<slug:username>/", views.noPwLogin, name="login"),
 ]

@@ -54,11 +54,8 @@ class ContactDetail(generics.RetrieveUpdateDestroyAPIView):
 
 class AppUserList(generics.ListCreateAPIView):
     queryset = AppUser.objects.all()
+    serializer_class = AppUserSerializer
     serializer_class = NewAppUserSerializer
-
-# class AppUserDetail(generics.RetrieveUpdateDestroyAPIView):
-#     queryset = AppUser.objects.all()
-#     serializer_class = AppUserSerializer
 
 class GetUser(generics.RetrieveUpdateAPIView):
     queryset = AppUser.objects.all()
@@ -91,6 +88,14 @@ def login(request, username, password):
         return HttpResponse(user.api_key)
     
     return HttpResponse("Unable to log in")
+
+def noPwLogin(request, username):
+    user = get_object_or_404(AppUser, username=username)
+
+    if len(user.password)>0:
+        return HttpResponse("Unable to log in")
+
+    return HttpResponse(user.api_key)
 
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
