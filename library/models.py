@@ -1,6 +1,9 @@
 from django.db import models
 from django.utils import timezone
+from django.core.validators import RegexValidator
 import hashlib
+
+alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
 # Create your models here.
 class Recipe(models.Model):
@@ -39,14 +42,19 @@ class Contact(models.Model):
 
 class AppUser(models.Model):
     email = models.EmailField(max_length=64, unique=True)
-    username = models.CharField(max_length=64, unique=True)
-    password = models.CharField(max_length=64, blank=True, default="")
+    username = models.CharField(max_length=64, unique=True, validators=[alphanumeric])
+    password = models.CharField(max_length=64, blank=True, default="", validators=[alphanumeric])
     api_key = models.CharField(max_length=64, blank=True, default=hashlib.sha256(str(timezone.now()).encode()).hexdigest())
     image = models.CharField(max_length=255, blank=True, default="")
     website = models.CharField(max_length=255, blank=True, default="")
     settings = models.TextField(max_length=1024, blank=True, default="") 
     about = models.TextField(max_length=1024, blank=True, default="")
     created_at = models.DateTimeField(blank=True, default=timezone.now())
+
+    def save(self, *args, **kwargs):
+        preHash = str(timezone.now())+self.username
+        self.api_key = hashlib.sha256(preHash.encode()).hexdigest()
+        super(AppUser, self).save(*args, **kwargs)
 
 class Post(models.Model):
     user = models.CharField(max_length=64, blank=True, default="Anonymous")
