@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Recipe, Test, Celebrity, Person, Contact, AppUser, Post
+from .models import Recipe, Test, Celebrity, Person, Contact, AppUser, Post, Word
 
 class RecipeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -52,3 +52,8 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = "__all__"
+
+class WordSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Word
+        fields = ["word", "level", "sentence"]

@@ -62,3 +62,11 @@ class Post(models.Model):
     likes = models.TextField(blank=True, default="")
     text = models.TextField(blank=True, default="")
     comments = models.TextField(blank=True, default="")
+
+class Word(models.Model):
+    word = models.CharField(max_length=64)
+    level = models.IntegerField()
+    sentence = models.CharField(max_length=255)
+
+    def __str__(self) -> str:
+        return self.word

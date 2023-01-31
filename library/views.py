@@ -1,8 +1,8 @@
 from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Recipe, Test, Celebrity, Person, Contact, AppUser, Post
-from .serializers import CelebritySerializer, PersonSerializer, RecipeSerializer, TestSerializer, ContactSerializer, AppUserSerializer, NewAppUserSerializer, PostSerializer
+from .models import Recipe, Test, Celebrity, Person, Contact, AppUser, Post, Word
+from .serializers import CelebritySerializer, PersonSerializer, RecipeSerializer, TestSerializer, ContactSerializer, AppUserSerializer, NewAppUserSerializer, PostSerializer, WordSerializer
 from django.shortcuts import render, get_object_or_404
 import json
 from django.http import JsonResponse, HttpResponse
@@ -104,3 +104,11 @@ class PostList(generics.ListCreateAPIView):
 class PostDetail(generics.RetrieveUpdateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+
+class WordList(generics.ListCreateAPIView):
+    queryset = Word.objects.all()
+    serializer_class = WordSerializer
+
+class WordDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Word.objects.all()
+    serializer_class = WordSerializer
