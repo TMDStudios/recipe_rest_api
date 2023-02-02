@@ -30,7 +30,7 @@ SECRET_KEY = str(os.getenv("SECRET_KEY"))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['apidojo.pythonanywhere.com', 'localhost']
+ALLOWED_HOSTS = ['apidojo.pythonanywhere.com', 'localhost', 'https://studyroom.tmdstudios.net',]
 
 
 # Application definition
@@ -42,18 +42,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'rest_framework',
-    'library.apps.LibraryConfig'
+    'library.apps.LibraryConfig',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+  'https://localhost:8000',
+  'https://localhost:8080',
+  'https://studyroom.tmdstudios.net',
 ]
 
 ROOT_URLCONF = 'recipes.urls'
